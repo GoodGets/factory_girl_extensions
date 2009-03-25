@@ -9,7 +9,7 @@ like to use on projects, when using factory_girl
 
 == Usage
 
-  To use these extensions, <tt>require 'factory_girl_extensions'</tt> in your <tt>factories.rb</tt> (or wherever)
+To use these extensions, <tt>require 'factory_girl_extensions'</tt> in your <tt>factories.rb</tt> (or wherever)
 
 FactoryGirlExtensions adds some shortcut methods.  Here are some examples:
 
