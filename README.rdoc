@@ -1,0 +1,48 @@
+= factory_girl extensions
+
+FactoryGirlExtensions is a simple set of extensions that I typically 
+like to use on projects, when using factory_girl
+
+== Install
+
+  $ sudo gem install remi-factory_girl_extensions -s http://gems.github.com
+
+== Usage
+
+  To use these extensions, <tt>require 'factory_girl_extensions'</tt> in your <tt>factories.rb</tt> (or wherever)
+
+FactoryGirlExtensions adds some shortcut methods.  Here are some examples:
+
+  User.generate              # this is equivalent to Factory(:user) or Factory.create(:user)
+  User.gen                   # this is a shortcut alias for #generate
+  User.build                 # this is equivalent to Factory.build(:user)
+  User.gen :name => 'Bob'    # this is equivalent to Factory(:user, :name => 'Bob')
+  :email.next                # this is equivalent to Factory.next(:email)
+  :admin_user.gen            # this is equivalent to Factory.gen(:admin_user)
+  'admin_user'.gen           # this is equivalent to Factory.gen(:admin_user)
+
+  # TODO
+  I think I would like to add User.gen_admin or maybe User.gen(:admin)
+  as a shortcut for generating an :admin_user factory
+
+=== Why User.gen instead of Factory(:user)
+
+Personally, I really dislike the <tt>Factory(:user)</tt> syntax.  When you have a lot of 
+factories, it's hard to see the names of the actual model classes.  I don't like this:
+
+  Factory(:user).should be_valid
+  Factory(:name, :string => 'something').should be_awesome
+  Factory(:comment, :user => Factory(:user)).should be_cool
+  Factory(:user).should do_some_stuff_with(:things)
+
+To me, the thing that draws my attention in that code snippet is <tt>Factory</tt>. 
+I don't care about <tt>Factory</tt>, I care about the actual models!  I prefer:
+
+  User.gen.should be_valid
+  Name.gen( :string => 'something' ).should be_awesome
+  Comment.gen( :user => User.gen ).should be_cool
+  User.gen.should do_some_stuff_with(:things)
+
+If you syntax highlight the above code, it's likely that the model names will 
+be the things that really jump out at you.  Even in plain text, it's easier to 
+understand that code than the above <tt>Factory(:code)</tt> in my opinion.
