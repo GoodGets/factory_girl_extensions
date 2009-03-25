@@ -1,5 +1,7 @@
 = factory_girl extensions
 
+NOTE: I will likely see if thoughtbot will accept these into the official factory_girl project, similar to http://dev.thoughtbot.com/factory_girl/classes/Factory/Syntax/Generate.html
+
 FactoryGirlExtensions is a simple set of extensions that I typically 
 like to use on projects, when using factory_girl
 
