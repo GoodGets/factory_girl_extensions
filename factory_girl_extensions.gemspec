@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{factory_girl_extensions}
-  s.version = "0.1.1"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["remi"]
-  s.date = %q{2009-03-25}
+  s.date = %q{2009-03-29}
   s.description = %q{helpful extensions for factory_girl}
   s.email = %q{remi@remitaylor.com}
-  s.files = ["Rakefile", "VERSION.yml", "README.rdoc", "lib/factory_girl_extensions.rb"]
+  s.files = ["Rakefile", "VERSION.yml", "README.rdoc", "lib/factory_girl_extensions.rb", "spec/dog_spec.rb", "spec/spec_helper.rb", "spec/extensions_spec.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/remi/factory_girl_extensions}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
