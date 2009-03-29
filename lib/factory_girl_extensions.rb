@@ -16,6 +16,7 @@ require 'factory_girl'
 #   User.build                 # this is equivalent to Factory.build(:user)
 #   User.gen! :name => 'Bob'   # this is equivalent to Factory(:user, :name => 'Bob')
 #   :email.next                # this is equivalent to Factory.next(:email)
+#   'email'.next               # this will NOT work because String#next already exists
 #   :admin_user.gen!           # this is equivalent to Factory.gen(:admin_user)
 #   'admin_user'.gen!          # this is equivalent to Factory.gen(:admin_user)
 #
