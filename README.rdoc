@@ -1,9 +1,10 @@
 = factory_girl extensions
 
-NOTE: I will likely see if thoughtbot will accept these into the official factory_girl project, similar to http://dev.thoughtbot.com/factory_girl/classes/Factory/Syntax/Generate.html
-
 FactoryGirlExtensions is a simple set of extensions that I typically 
 like to use on projects, when using factory_girl
+
+NOTE: I might try adding this as an official factory_girl 'syntax', in which case
+      these extensions will be available to anyone using factory_girl
 
 == Install
 
@@ -15,13 +16,15 @@ To use these extensions, <tt>require 'factory_girl_extensions'</tt> in your <tt>
 
 FactoryGirlExtensions adds some shortcut methods.  Here are some examples:
 
-  User.generate              # this is equivalent to Factory(:user) or Factory.create(:user)
-  User.gen                   # this is a shortcut alias for #generate
-  User.build                 # this is equivalent to Factory.build(:user)
-  User.gen :name => 'Bob'    # this is equivalent to Factory(:user, :name => 'Bob')
-  :email.next                # this is equivalent to Factory.next(:email)
-  :admin_user.gen            # this is equivalent to Factory.gen(:admin_user)
-  'admin_user'.gen           # this is equivalent to Factory.gen(:admin_user)
+   User.generate!             # this is equivalent to Factory(:user) or Factory.create(:user)
+   User.gen!                  # this is a shortcut alias for #generate
+   User.generate              # this is equivalent to Factory.build(:user) and then #save
+   User.gen                   # this is equivalent to Factory.build(:user) and then #save
+   User.build                 # this is equivalent to Factory.build(:user)
+   User.gen! :name => 'Bob'   # this is equivalent to Factory(:user, :name => 'Bob')
+   :email.next                # this is equivalent to Factory.next(:email)
+   :admin_user.gen!           # this is equivalent to Factory.gen(:admin_user)
+   'admin_user'.gen!          # this is equivalent to Factory.gen(:admin_user)
 
   # TODO
   I think I would like to add User.gen_admin or maybe User.gen(:admin)

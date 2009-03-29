@@ -9,13 +9,15 @@ require 'factory_girl'
 #
 # == Usage
 # 
-#   User.generate              # this is equivalent to Factory(:user) or Factory.create(:user)
-#   User.gen                   # this is a shortcut alias for #generate
+#   User.generate!             # this is equivalent to Factory(:user) or Factory.create(:user)
+#   User.gen!                  # this is a shortcut alias for #generate
+#   User.generate              # this is equivalent to Factory.build(:user) and then #save
+#   User.gen                   # this is equivalent to Factory.build(:user) and then #save
 #   User.build                 # this is equivalent to Factory.build(:user)
-#   User.gen :name => 'Bob'    # this is equivalent to Factory(:user, :name => 'Bob')
+#   User.gen! :name => 'Bob'   # this is equivalent to Factory(:user, :name => 'Bob')
 #   :email.next                # this is equivalent to Factory.next(:email)
-#   :admin_user.gen            # this is equivalent to Factory.gen(:admin_user)
-#   'admin_user'.gen           # this is equivalent to Factory.gen(:admin_user)
+#   :admin_user.gen!           # this is equivalent to Factory.gen(:admin_user)
+#   'admin_user'.gen!          # this is equivalent to Factory.gen(:admin_user)
 #
 # == TODO
 #
@@ -25,19 +27,30 @@ require 'factory_girl'
 module FactoryGirlExtensions
   def method_missing name, *args
     
-    message = case name.to_s
+    messages = case name.to_s
+    when /^gen(erate)?\!$/
+      [:build, :save!]
     when /^gen(erate)?$/
-      :create
+      [:build, :save]
     when 'build'
-      :build
+      [:build]
     when 'next'
-      :next
+      [:next]
     end
 
-    if message
+    if messages
       # if this is an instance of String/Symbol use this instance as the factory name, else use the class name
       factory_name = ( kind_of?(Symbol) || kind_of?(String) ) ? self.to_s.to_sym : self.name.underscore.to_sym
-      Factory.send message, factory_name, *args
+
+      factory_method, instance_method = messages
+      instance = Factory.send factory_method, factory_name, *args
+
+      if instance_method
+        instance.send instance_method if instance.respond_to? instance_method
+      end
+      
+      instance
+
     else
       super
     end

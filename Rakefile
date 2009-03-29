@@ -22,6 +22,7 @@ end
 
 Spec::Rake::SpecTask.new do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
+  t.spec_opts = ['-c', '-f specdoc']
 end
 
 desc "Run all examples with RCov"
