@@ -29,6 +29,15 @@ describe FactoryGirlExtensions do
     'dog'.gen!.should be_valid
   end
 
+  it 'Dog.attrs & "dog".attrs & :dog.attrs should return Factory.attributes_for(:dog)' do
+    [ Dog, 'dog', :dog ].each do |x|
+      %w( attrs attributes attrs_for attributes_for ).each do |msg|
+        x.send(msg).keys.should include(:name)
+        x.send(msg)[:name].should =~ /HelloWorld\d/
+      end
+    end
+  end
+
   it ':foo.next should generate the :foo sequence' do
     lambda { :foo.next }.should raise_error(/No such sequence: foo/)
     Factory.sequence(:foo){|n| "Foo ##{n}" }

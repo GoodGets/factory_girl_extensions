@@ -19,6 +19,9 @@ require 'factory_girl'
 #   'email'.next               # this will NOT work because String#next already exists
 #   :admin_user.gen!           # this is equivalent to Factory.gen(:admin_user)
 #   'admin_user'.gen!          # this is equivalent to Factory.gen(:admin_user)
+#   User.attrs                 # this is equivalent to Factory.attributes_for(:user)
+#   'user'.attrs               # this is equivalent to Factory.attributes_for(:user)
+#   :user.attrs                # this is equivalent to Factory.attributes_for(:user)
 #
 # == TODO
 #
@@ -37,6 +40,8 @@ module FactoryGirlExtensions
       [:build]
     when 'next'
       [:next]
+    when /^attr(ibute)?s(_for)?$/
+      [:attributes_for]
     end
 
     if messages
