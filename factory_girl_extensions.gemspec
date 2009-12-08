@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{factory_girl_extensions}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["remi"]
@@ -38,11 +38,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<thoughtbot-factory_girl>, [">= 0"])
+      s.add_runtime_dependency(%q<factory_girl>, [">= 0"])
     else
-      s.add_dependency(%q<thoughtbot-factory_girl>, [">= 0"])
+      s.add_dependency(%q<factory_girl>, [">= 0"])
     end
   else
-    s.add_dependency(%q<thoughtbot-factory_girl>, [">= 0"])
+    s.add_dependency(%q<factory_girl>, [">= 0"])
   end
 end
