@@ -18,7 +18,7 @@ class Dog
   end
 
   def valid?
-    ! @name.blank?
+    not (@name.nil? or @name.strip == '')
   end
 
   def save!

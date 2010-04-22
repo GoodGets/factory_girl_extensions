@@ -29,6 +29,16 @@
 #
 module FactoryGirlExtensions
 
+  # I was relying on String#underscore being available and it's not always.
+  # Copies this from ActiveSupport.
+  def underscore_string string
+    string.to_s.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+  end
+
   # This is the actual (private) implementation
   def self.__method_missing object, name, *args, &block
     raise '' unless defined? Factory
@@ -48,7 +58,7 @@ module FactoryGirlExtensions
 
     if messages
       # if this is an instance of String/Symbol use this instance as the factory name, else use the class name
-      factory_name = ( object.kind_of?(Symbol) || object.kind_of?(String) ) ? object.to_s.to_sym : object.name.underscore.to_sym
+      factory_name = ( object.kind_of?(Symbol) || object.kind_of?(String) ) ? object.to_s.to_sym : underscore_string(object.name).to_sym
 
       factory_method, instance_method = messages
       instance = Factory.send factory_method, factory_name, *args
