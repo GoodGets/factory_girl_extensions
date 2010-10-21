@@ -41,7 +41,7 @@ module FactoryGirlExtensions
 
   # This is the actual (private) implementation
   def self.__method_missing object, name, *args, &block
-    raise '' unless defined? Factory
+    raise 'Factory is not defined.  Have you required factory_girl?' unless defined? Factory
 
     messages = case name.to_s
     when /^gen(erate)?\!$/
