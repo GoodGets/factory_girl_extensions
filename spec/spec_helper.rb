@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'spec'
+require 'rspec'
 require 'factory_girl'
 require File.dirname(__FILE__) + '/../lib/factory_girl_extensions'
 

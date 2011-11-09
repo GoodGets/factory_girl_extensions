@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'factory_girl_extensions'
-  s.version     = '0.3.4'
+  s.version     = '0.3.5'
   s.summary     = 'helpful extensions for factory_girl'
   s.description = 'helpful extensions for factory_girl'
   s.files       = Dir['{lib}/**/*']

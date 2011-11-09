@@ -82,7 +82,9 @@ module FactoryGirlExtensions
     
     # If no extensions were found, call super
     if object == :no_extension_found
-      super
+      problem = caller(1).first
+      message = "undefined method `#{name}' for #{inspect}:#{self.class}\n  Note: This may be where the problem is: #{problem}\n"
+      raise NoMethodError.new(message)
     else
       object
     end
