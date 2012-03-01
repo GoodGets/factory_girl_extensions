@@ -82,7 +82,7 @@ module FactoryGirlExtensions
     
     # If no extensions were found, call super
     if object == :no_extension_found
-      raise NoMethodError.new("Undefined method #{name}")
+      super
     else
       object
     end
