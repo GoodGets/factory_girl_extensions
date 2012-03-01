@@ -3,7 +3,13 @@ require File.dirname(__FILE__) + '/spec_helper'
 Factory.sequence(:string){|n| "HelloWorld#{ n }" }
 
 Factory.define :dog do |d|
-  d.name { :string.next }
+  d.name do
+    if RUBY_VERSION.to_f > 1.8
+      Factory.next(:string)
+    else
+      :string.next
+    end
+  end
 end
 
 describe FactoryGirlExtensions do
@@ -39,6 +45,10 @@ describe FactoryGirlExtensions do
   end
 
   it ':foo.next should generate the :foo sequence' do
+    if RUBY_VERSION.to_f > 1.8
+      pending "Symbol#next is unsupported in Ruby 1.9+ (because Ruby implements Symbol#next and we're not going to override it)"
+    end
+
     lambda { :foo.next }.should raise_error(/Sequence not registered: foo/)
     Factory.sequence(:foo){|n| "Foo ##{n}" }
     :foo.next.should  == 'Foo #1'
