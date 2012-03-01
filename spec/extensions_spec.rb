@@ -44,18 +44,4 @@ describe FactoryGirlExtensions do
     :foo.next.should  == 'Foo #1'
     :foo.next.should  == 'Foo #2'
   end
-
-  it "should give you a somewhat useful message when method_missing fails (so you know that it's not our fault!)" do
-    exception = nil
-    begin
-      @whoops_i_forgot_to_set_this_var.call_a_method_that_doesnt_exist
-    rescue NoMethodError => ex
-      exception = ex
-    ensure
-      exception.should_not be_nil
-      exception.message.should include("undefined method `call_a_method_that_doesnt_exist' for nil:NilClass") # normal message
-      exception.message.should =~ /Note: This may be where the problem is: .*\/factory_girl_extensions\/spec\/extensions_spec.rb:51/
-    end
-  end
-
 end
