@@ -39,7 +39,7 @@ describe FactoryGirlExtensions do
   end
 
   it ':foo.next should generate the :foo sequence' do
-    lambda { :foo.next }.should raise_error(/No such sequence: foo/)
+    lambda { :foo.next }.should raise_error(/Sequence not registered: foo/)
     Factory.sequence(:foo){|n| "Foo ##{n}" }
     :foo.next.should  == 'Foo #1'
     :foo.next.should  == 'Foo #2'
